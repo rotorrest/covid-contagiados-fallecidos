@@ -6,7 +6,7 @@ on:
     branches: [ main ]
   schedule:
     #- cron: '0 0,6,12,23 * * *' #At minute 0 past hour 0, 6, 12, and 23.
-    - cron: '5 * * * *' #At minute 0 past hour 0, 6, 12, and 23.
+    - cron: '* * * * *' #At minute 0 past hour 0, 6, 12, and 23.
 
 
 jobs:
