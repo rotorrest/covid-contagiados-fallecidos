@@ -4,9 +4,11 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-  schedule:
+    on: push
+
+  #schedule:
     #- cron: '0 0,6,12,23 * * *' #At minute 0 past hour 0, 6, 12, and 23.
-    - cron: '54 22 * * *' #At minute 0 past hour 0, 6, 12, and 23.
+   # - cron: '54 22 * * *' #At minute 0 past hour 0, 6, 12, and 23.
 
 
 jobs:
