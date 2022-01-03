@@ -5,7 +5,8 @@ on:
   push:
     branches: [ main ]
   schedule:
-    #- cron: '*/5 * * * 1-5' # runs at every 1 min
+    - cron: '0 0,6,12,23 * * *' #At minute 0 past hour 0, 6, 12, and 23.
+
 
 jobs:
   scraper:
@@ -23,8 +24,7 @@ jobs:
       - name: execute my python script
         run: |
           pip install -r r.txt
-          python main.py
-          python grafico.py
+          python graphs.py
           
       - name: commit my files
         run: |
@@ -38,6 +38,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
-© 2022 GitHub, Inc.
-Terms
-Privacy
