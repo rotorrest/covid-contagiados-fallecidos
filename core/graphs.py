@@ -47,7 +47,7 @@ class Graph:
         return moving_averages.tolist()
     
 
-    def departamento_plot(departamentos, date_positivos, date_fallecidos, positivos, fallecidos, i):
+    def departamento_plot_img(departamentos, date_positivos, date_fallecidos, positivos, fallecidos, i):
         
         # Create figure with secondary y-axis
         ciudad = departamentos[i].title()
@@ -129,8 +129,11 @@ class Graph:
         #     )
         # )
 
+        date = date_positivos[-1]
+        date = date.strftime("%b %d %Y")
+
         fig.update_layout(
-            title = ciudad +': Fallecidos y Contagiados Media Movil 7 dias',
+            title = ciudad +': Fallecidos y Contagiados Media Movil 7 dias <br> <b>' + str(date) + '</b>',
                 xaxis_tickformat = '%d %B %Y',
 
             showlegend=True,
@@ -144,4 +147,102 @@ class Graph:
         fig.write_image("img/"+ciudad+".png")
         fig.write_html("html/"+ciudad+".html")
                         
-        print(ciudad)
+        
+    def departamento_plot_html(departamentos, date_positivos, date_fallecidos, positivos, fallecidos, i):
+        
+        # Create figure with secondary y-axis
+        ciudad = departamentos[i].title()
+        y_fallecidos = list(fallecidos["size"][departamentos[i]])
+        y_positivos = list(positivos["size"][departamentos[i]])
+
+        fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+        # #fallecidos
+        # fig.add_trace(
+        #     go.Scatter(
+        #         mode='markers',
+        #         line_color='blue',
+        #         x=date_fallecidos, 
+        #         y=y_fallecidos, 
+        #         name="Fallecidos"),
+                        
+        #     secondary_y=True,
+        # )
+        
+        #MA_positivos
+        fig.add_trace(
+            go.Scatter(x=date_positivos, 
+                        y=Graph.MA(y_positivos),
+                        line_color='green', 
+                        name="Contagios"),
+            secondary_y=False,
+
+        )
+
+        #MA_fallecidos
+        fig.add_trace(
+            go.Scatter(x=date_fallecidos, 
+                        y=Graph.MA(y_fallecidos),
+                        line_color='blue', 
+                        name="Fallecidos"),
+            secondary_y=True,
+        )
+
+
+        # #positivos
+        # fig.add_trace(
+        #     go.Scatter(
+        #         mode='markers',
+        #         line_color='green',
+        #         x=date_positivos, 
+        #         y=y_positivos, 
+        #         name="Positivos"),
+                        
+        #     secondary_y=False,
+        # )
+
+
+
+        # Set y-axes titles
+        fig.update_yaxes(title_text="<b>Contagios</b>", secondary_y=False)
+        fig.update_yaxes(title_text="<b>Fallecidos</b>", secondary_y=True)
+
+        #window
+        fig.update_layout(
+            xaxis=dict(
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=1,
+                            label="1m",
+                            step="month",
+                            stepmode="backward"),
+                        dict(count=6,
+                            label="6m",
+                            step="month",
+                            stepmode="backward"),
+                        dict(step="all")
+                    ])
+                ),
+                rangeslider=dict(
+                    visible=True
+                ),
+                type="date"
+            )
+        )
+
+        date = date_positivos[-1]
+        date = date.strftime("%b %d %Y")
+
+        fig.update_layout(
+            title = ciudad +': Fallecidos y Contagiados Media Movil 7 dias ' + str(date),
+                xaxis_tickformat = '%d %B %Y',
+
+            showlegend=True,
+            template="plotly_white",
+            legend=dict(
+                yanchor="top",
+                y=0.99,
+                xanchor="left",
+                x=0.01)
+            )
+        fig.write_html("html/"+ciudad+".html")                        

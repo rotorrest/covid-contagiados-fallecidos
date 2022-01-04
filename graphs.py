@@ -27,9 +27,6 @@ def CreateGraphs():
   df_positivos = pd.read_csv('positivos.csv', sep=';') 
   df_fallecidos = pd.read_csv('fallecidos.csv', sep=';') 
 
-  os.remove('positivos.csv')
-  os.remove('fallecidos.csv')
-
   #T
   positivos = Graph.pivot_index(df_positivos, "FECHA_RESULTADO")
   fallecidos = Graph.pivot_index(df_fallecidos, "FECHA_FALLECIMIENTO")
@@ -37,4 +34,6 @@ def CreateGraphs():
   date_fallecidos = Graph.date_list(fallecidos)
       
   for i in tqdm(range(len(departamentos)), ncols=50):
-    Graph.departamento_plot(departamentos, date_positivos, date_fallecidos, positivos, fallecidos, i)
+    print(departamentos[i].title())
+    Graph.departamento_plot_img(departamentos, date_positivos, date_fallecidos, positivos, fallecidos, i)
+    Graph.departamento_plot_html(departamentos, date_positivos, date_fallecidos, positivos, fallecidos, i)

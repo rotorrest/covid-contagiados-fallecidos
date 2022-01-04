@@ -1,3 +1,7 @@
+#aux cvs / results
+positivos.csv
+fallecidos.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
