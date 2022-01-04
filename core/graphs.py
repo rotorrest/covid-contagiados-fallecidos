@@ -144,8 +144,7 @@ class Graph:
                 xanchor="left",
                 x=0.01)
             )
-        fig.write_image("img/"+ciudad+".png")
-        fig.write_html("html/"+ciudad+".html")
+        fig.write_image("img/"+ciudad.replace(" ","")+".png")
                         
         
     def departamento_plot_html(departamentos, date_positivos, date_fallecidos, positivos, fallecidos, i):
@@ -245,4 +244,4 @@ class Graph:
                 xanchor="left",
                 x=0.01)
             )
-        fig.write_html("html/"+ciudad+".html")                        
+        fig.write_html("html/"+ciudad.replace(" ","")+".html")                        

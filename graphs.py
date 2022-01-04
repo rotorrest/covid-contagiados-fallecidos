@@ -17,12 +17,12 @@ def CreateGraphs():
   header=Headers()
 
   #E
-  response_positivos = requests.get(URL_positivos, headers=header.generate())
-  response_fallecidos = requests.get(URL_fallecidos, headers=header.generate())
+#  response_positivos = requests.get(URL_positivos, headers=header.generate())
+#  response_fallecidos = requests.get(URL_fallecidos, headers=header.generate())
 
-  Graph.folders()
-  Graph.save_csv_from_response(response_fallecidos, "fallecidos")
-  Graph.save_csv_from_response(response_positivos, "positivos")
+#  Graph.folders()
+#  Graph.save_csv_from_response(response_fallecidos, "fallecidos")
+#  Graph.save_csv_from_response(response_positivos, "positivos")
 
   df_positivos = pd.read_csv('positivos.csv', sep=';') 
   df_fallecidos = pd.read_csv('fallecidos.csv', sep=';') 
