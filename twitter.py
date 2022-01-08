@@ -25,8 +25,8 @@ class Twitter:
         aux_id_holder = aux_tweet.id
         
         #for for dev
-        for i in tqdm(range(2), ncols=80, desc="Actualizando Twitter"):
-        #for i in tqdm(range(len(self.departamentos)), ncols=80, desc="Actualizando Twitter"):
+        #for i in tqdm(range(2), ncols=80, desc="Actualizando Twitter"):
+        for i in tqdm(range(len(self.departamentos)), ncols=80, desc="Actualizando Twitter"):
             
             wtp_url = "api.whatsapp.com/send?text=" + parse.quote_plus(self.departamentos[i] + " COVID-19: Contagios y fallecidos " + self.short_html[self.htmls[i]] + "\n Sigue al bot en twitter twitter.com/CovidPeruBot")
             text = "COVID-19: Contagios y fallecidos "  + "\n" + '\U0001F4CD' + " " + self.departamentos[i]   + "\n" + '\U0001F4C5' + " " + "Actualización: " + date  + "\n" + '\U0001F517' + " " +  "Gráfico Interactivo: " + self.short_html[self.htmls[i]] + "\n" + '\U0001F7E2' + " " +	 "Comparte en whatsapp: " + wtp_url 
