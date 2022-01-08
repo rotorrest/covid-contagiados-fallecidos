@@ -25,7 +25,7 @@ class Twitter:
         aux_tweet = self.api.update_status_with_media(status="Peru", filename="img/peru.jpg", )
         aux_id_holder = aux_tweet.id
         
-        for i in tqdm(len(self.departamentos), ncols=80, desc="Actualizando Twitter"):
+        for i in tqdm(range(len(self.departamentos)), ncols=80, desc="Actualizando Twitter"):
             
             wtp_url = "api.whatsapp.com/send?text=" + parse.quote_plus(self.departamentos[i] + " COVID-19: Contagios y fallecidos " + self.short_html[self.htmls[i]] + "\n Sigue al bot en twitter twitter.com/CovidPeruBot")
 
