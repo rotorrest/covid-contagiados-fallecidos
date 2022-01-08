@@ -5,7 +5,7 @@ from github import Update
 #from twitter import Twitter
 
 parser = argparse.ArgumentParser()
-parser.add_argument('update', type=str, help='update github')
+parser.add_argument('update', type=int, help='update github')
 
 args = parser.parse_args()
 
@@ -13,19 +13,9 @@ args = parser.parse_args()
 CreateGraphs()
 
 #L
-if args.update == 'u':
+if args.update == 1:
     Update()
 
 #Twiter
 #x = Twitter()
 #x.UpdateTwitter()
-
-
-import argparse
-
-parser = argparse.ArgumentParser()
-parser.add_argument('update', help='update github')
-
-args = parser.parse_args()
-
-print(type(args.update))
