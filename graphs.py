@@ -17,12 +17,12 @@ def CreateGraphs():
   header=Headers()
 
   #E
-#  response_positivos = requests.get(URL_positivos, headers=header.generate())
-#  response_fallecidos = requests.get(URL_fallecidos, headers=header.generate())
+  response_positivos = requests.get(URL_positivos, headers=header.generate())
+  response_fallecidos = requests.get(URL_fallecidos, headers=header.generate())
 
-#  Graph.folders()
-#  Graph.save_csv_from_response(response_fallecidos, "fallecidos")
-#  Graph.save_csv_from_response(response_positivos, "positivos")
+  # Graph.folders()
+  # Graph.save_csv_from_response(response_fallecidos, "fallecidos")
+  # Graph.save_csv_from_response(response_positivos, "positivos")
 
   df_positivos = pd.read_csv('positivos.csv', sep=';') 
   df_fallecidos = pd.read_csv('fallecidos.csv', sep=';') 
@@ -32,8 +32,11 @@ def CreateGraphs():
   fallecidos = Graph.pivot_index(df_fallecidos, "FECHA_FALLECIMIENTO")
   date_positivos = Graph.date_list(positivos)
   date_fallecidos = Graph.date_list(fallecidos)
-      
+  
   for i in tqdm(range(len(departamentos)), ncols=50):
     print(departamentos[i].title())
     Graph.departamento_plot_img(departamentos, date_positivos, date_fallecidos, positivos, fallecidos, i)
     Graph.departamento_plot_html(departamentos, date_positivos, date_fallecidos, positivos, fallecidos, i)
+  
+  date = date_positivos[-1]
+  return date.strftime("%b %d %Y")

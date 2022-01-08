@@ -2,20 +2,20 @@ import argparse
 
 from graphs import CreateGraphs
 from github import Update
-#from twitter import Twitter
+from twitter import Twitter
 
 parser = argparse.ArgumentParser()
-parser.add_argument('update', type=int, help='update github')
+parser.add_argument('update', type=int, help='update github of arg = 1')
 
 args = parser.parse_args()
 
 #E #T
-CreateGraphs()
+date = CreateGraphs()
 
 #L
 if args.update == 1:
-    Update()
+   Update()
 
 #Twiter
-#x = Twitter()
-#x.UpdateTwitter()
+x = Twitter()
+x.UpdateTwitter(date)

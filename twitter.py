@@ -7,45 +7,40 @@ class Twitter:
     
     def __init__(self) -> None:
         load_dotenv()
-        self.API_Key = os.getenv('API_Key')
-        self.API_Key_Secret = os.getenv('API_Key_Secret')
-        self.Bearer_Token = os.getenv('Bearer_Token')
-        self.Access_Token = os.getenv('Access_Token')
-        self.Access_Token_Secret = os.getenv('Access_Token_Secret')
-
-    def get_api(self):
-
-        Authenticate to Twitter
-        auth = tweepy.OAuthHandler(self.API_Key, self.API_Key_Secret)
-        auth.set_access_token(self.Access_Token, self.Access_Token_Secret)
-
-        Create API object
-        api = tweepy.API(auth)
-
-        try:
-            api.verify_credentials()
-            print("Authentication OK")
-        except:
-            print("Error during authentication")
-
-        return api
-    
-    def fist_tweet(self, api, imgs, htmls):
-        api.update_with_media(imgs[0], htmls[0])
-                
-    def UpdateTwitter(self):
-        api = self.get_api()
-        imgs, htmls = self.img_html_paths()
-    
-        self.fist_tweet(api, imgs, htmls)
+ 
+        auth = tweepy.OAuthHandler(os.getenv('API_Key'), os.getenv('API_Key_Secret'))
+        auth.set_access_token(os.getenv('Access_Token'), os.getenv('Access_Token_Secret'))        
+        self.api = tweepy.API(auth)
+         
+        self.departamentos, self.imgs, self.htmls = Twitter.img_html_paths()
         
-        self.todos_los_demas(api, imgs, htmls)
+    def UpdateTwitter(self, date):
 
+        aux_tweet = self.api.update_status_with_media(status="Peru", filename="img/peru.jpg", )
+        aux_id_holder = aux_tweet.id
+        
+        #for i in range(len(self.departamentos)):
+        for i in range(4):
+            text = "Estado de contagios y fallecidos COVID-19 en " + self.departamentos[i] +"\n" + "fecha de actualización: " + date  +"\n" + "link: " + self.htmls[i] + "\n" + "Compartir en whatsapp: https://wa/test "
+            
+            
+            aux_id_holder = Twitter.reply_to_status(self, aux_id_holder, status=text,filename=self.imgs[i])
+            
+            
 
     def img_html_paths():
         
         departamentos = ['AMAZONAS','ANCASH','APURIMAC','AREQUIPA','AYACUCHO','CAJAMARCA','CALLAO','CUSCO','HUANCAVELICA','HUANUCO','ICA','JUNIN','LA LIBERTAD','LAMBAYEQUE','LIMA','LORETO','MADRE DE DIOS','MOQUEGUA','PASCO','PIURA','PUNO','SAN MARTIN','TACNA','TUMBES','UCAYALI']
+        departamentos = [w.title() for w in departamentos]
         imgs = ["img/" + w.title() + ".png" for w in departamentos]
         htmls = ["https://optimistic-aryabhata-c23029.netlify.app/html/" + w.title().replace(" ", "") for w in departamentos]
         
-        return imgs, htmls
+        return departamentos, imgs, htmls
+    
+    def reply_to_status(self, id, status,filename):
+
+        tweet = self.api.update_status_with_media(filename=filename,
+                                            status=status, 
+                                            in_reply_to_status_id=id)
+        
+        return tweet.id
