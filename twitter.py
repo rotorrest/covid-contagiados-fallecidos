@@ -38,7 +38,7 @@ class Twitter:
         
         departamentos = ['AMAZONAS','ANCASH','APURIMAC','AREQUIPA','AYACUCHO','CAJAMARCA','CALLAO','CUSCO','HUANCAVELICA','HUANUCO','ICA','JUNIN','LA LIBERTAD','LAMBAYEQUE','LIMA','LORETO','MADRE DE DIOS','MOQUEGUA','PASCO','PIURA','PUNO','SAN MARTIN','TACNA','TUMBES','UCAYALI']
         departamentos = [w.title() for w in departamentos]
-        imgs = ["img/" + w.title() + ".png" for w in departamentos]
+        imgs = ["img/" + w.title().replace(" ", "") + ".png" for w in departamentos]
         htmls = ["https://optimistic-aryabhata-c23029.netlify.app/html/" + w.title().replace(" ", "") for w in departamentos]
         
         short_html = {"https://optimistic-aryabhata-c23029.netlify.app/html/Ucayali" : "https://bit.ly/3JSs43t",
