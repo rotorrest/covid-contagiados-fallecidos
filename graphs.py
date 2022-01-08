@@ -15,14 +15,18 @@ def CreateGraphs():
   URL_fallecidos = os.getenv('URL_fallecidos')
   departamentos = ['AMAZONAS','ANCASH','APURIMAC','AREQUIPA','AYACUCHO','CAJAMARCA','CALLAO','CUSCO','HUANCAVELICA','HUANUCO','ICA','JUNIN','LA LIBERTAD','LAMBAYEQUE','LIMA','LORETO','MADRE DE DIOS','MOQUEGUA','PASCO','PIURA','PUNO','SAN MARTIN','TACNA','TUMBES','UCAYALI']
   header=Headers()
+  
+  #To disable update comment from here ###############
 
   #E
-  response_positivos = requests.get(URL_positivos, headers=header.generate())
-  response_fallecidos = requests.get(URL_fallecidos, headers=header.generate())
+  # response_positivos = requests.get(URL_positivos, headers=header.generate())
+  # response_fallecidos = requests.get(URL_fallecidos, headers=header.generate())
 
   # Graph.folders()
   # Graph.save_csv_from_response(response_fallecidos, "fallecidos")
   # Graph.save_csv_from_response(response_positivos, "positivos")
+
+  #To Here                               ###############
 
   df_positivos = pd.read_csv('positivos.csv', sep=';') 
   df_fallecidos = pd.read_csv('fallecidos.csv', sep=';') 
