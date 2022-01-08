@@ -8,7 +8,6 @@ import urllib.parse as parse
 from dotenv import load_dotenv
 
 
-
 class Twitter:
     
     def __init__(self) -> None:
@@ -17,7 +16,7 @@ class Twitter:
         auth = tweepy.OAuthHandler(os.getenv('API_Key'), os.getenv('API_Key_Secret'))
         auth.set_access_token(os.getenv('Access_Token'), os.getenv('Access_Token_Secret'))        
         self.api = tweepy.API(auth)
-         
+                 
         self.departamentos, self.imgs, self.htmls, self.short_html= Twitter.img_html_paths()
         
     def UpdateTwitter(self, date):
@@ -25,12 +24,12 @@ class Twitter:
         aux_tweet = self.api.update_status_with_media(status="Peru", filename="img/peru.jpg", )
         aux_id_holder = aux_tweet.id
         
-        for i in tqdm(range(len(self.departamentos)), ncols=80, desc="Actualizando Twitter"):
+        #for for dev
+        for i in tqdm(range(2), ncols=80, desc="Actualizando Twitter"):
+        #for i in tqdm(range(len(self.departamentos)), ncols=80, desc="Actualizando Twitter"):
             
             wtp_url = "api.whatsapp.com/send?text=" + parse.quote_plus(self.departamentos[i] + " COVID-19: Contagios y fallecidos " + self.short_html[self.htmls[i]] + "\n Sigue al bot en twitter twitter.com/CovidPeruBot")
-
-            
-            text = "COVID-19: Contagios y fallecidos "  + "\n" + '\U0001F4CD' +" "+ self.departamentos[i]   + "\n" + '\U0001F4C5' +" "+ "Actualización: " + date  +"\n" + '\U0001F517' +" "+  "Link: " + self.short_html[self.htmls[i]] + "\n" + '\U0001F7E2' +" "+	 "Comparte en whatsapp: " + wtp_url 
+            text = "COVID-19: Contagios y fallecidos "  + "\n" + '\U0001F4CD' + " " + self.departamentos[i]   + "\n" + '\U0001F4C5' + " " + "Actualización: " + date  + "\n" + '\U0001F517' + " " +  "Gráfico Interactivo: " + self.short_html[self.htmls[i]] + "\n" + '\U0001F7E2' + " " +	 "Comparte en whatsapp: " + wtp_url 
 
             aux_id_holder = Twitter.reply_to_status(self, aux_id_holder, status=text,filename=self.imgs[i])
             
