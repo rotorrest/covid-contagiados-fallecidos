@@ -20,8 +20,8 @@ class Twitter:
         self.departamentos, self.imgs, self.htmls, self.short_html= Twitter.img_html_paths()
         
     def UpdateTwitter(self, date):
-
-        aux_tweet = self.api.update_status_with_media(status="Peru", filename="img/peru.jpg", )
+        header_text = "Fallecidos y Contagiados por Covid-19" + "\n" + '\U0001F4C5' + " " + "Actualización: " + date + "\n" + "Detalle por departamentos "  + "\n" + '\U0001F9F5' + '\U0001F9F5' +'\U0001F9F5'
+        aux_tweet = self.api.update_status_with_media(status=header_text, filename="img/peru.jpg", )
         aux_id_holder = aux_tweet.id
         
         #for for dev
