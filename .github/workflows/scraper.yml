@@ -16,14 +16,20 @@ jobs:
           python-version: '3.8.5' # install the python version needed
 
       - name: Create env file
-        run: |
-          echo ${secrets.URL_POSITIVOS}
+          env:
+            SUPER_SECRET: ${{ secrets.URL_POSITIVOS }}
+          run: |
+            example-command "$URL_POSITIVOS"
 
 
       - name: execute my python script
-        run: |
-          pip install -r r.txt
-          python graphs.py
+        steps:
+          - shell: bash
+            env:
+              SUPER_SECRET: ${{ secrets.URL_POSITIVOS }}
+            run: |
+              echo ${SUPER_SECRET}
+
           
       - name: commit my files
         run: |
