@@ -10,7 +10,7 @@ parser.add_argument('update', type=int, help='update github of arg = 1')
 args = parser.parse_args()
 
 #E #T
-#date = CreateGraphs()
+date = CreateGraphs()
 
 #L
 if args.update == 1:
