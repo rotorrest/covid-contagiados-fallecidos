@@ -18,7 +18,7 @@ jobs:
       - name: Create env file
         run: |
           touch .env
-          echo URL_positivos=${{ env.URL_positivos }} >> .env
+          echo URL_positivos=${{ env.URL_POSITIVOS }} >> .env
           echo URL_fallecidos=${{ env.URL_fallecidos }} >> .env
           echo API_Key=${{ env.API_Key }} >> .env
           echo API_Key_Secret=${{ env.API_Key_Secret }} >> .env
