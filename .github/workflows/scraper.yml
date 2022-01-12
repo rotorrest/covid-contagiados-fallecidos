@@ -15,17 +15,17 @@ jobs:
         with:
           python-version: '3.8.5' # install the python version needed
 
-      #- name: Create env file
-      #  run: |
-      #    touch .env
-      #    echo URL_positivos=${{ secrets.URL_positivos }} >> .env
-      #    echo URL_fallecidos=${{ secrets.URL_fallecidos }} >> .env
-      #    echo API_Key=${{ secrets.API_Key }} >> .env
-      #    echo API_Key_Secret=${{ secrets.API_Key_Secret }} >> .env
-      #    echo Bearer_Token=${{ secrets.Bearer_Token }} >> .env
-      #    echo Access_Token=${{ secrets.Access_Token }} >> .env
-      #    echo Access_Token_Secret=${{ secrets.Access_Token_Secret }} >> .env
-      #    cat .env
+      - name: Create env file
+        run: |
+          touch .env
+          echo URL_positivos=${{ env.URL_positivos }} >> .env
+          echo URL_fallecidos=${{ env.URL_fallecidos }} >> .env
+          echo API_Key=${{ env.API_Key }} >> .env
+          echo API_Key_Secret=${{ env.API_Key_Secret }} >> .env
+          echo Bearer_Token=${{ env.Bearer_Token }} >> .env
+          echo Access_Token=${{ env.Access_Token }} >> .env
+          echo Access_Token_Secret=${{ env.Access_Token_Secret }} >> .env
+          cat .env
 
       - name: execute my python script
         run: |
