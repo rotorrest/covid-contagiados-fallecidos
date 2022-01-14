@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 class Twitter:
     
     def __init__(self) -> None:
+        
         load_dotenv()
  
         auth = tweepy.OAuthHandler(os.getenv('API_Key'), os.getenv('API_Key_Secret'))
