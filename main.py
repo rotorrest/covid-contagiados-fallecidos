@@ -16,6 +16,6 @@ date = CreateGraphs()
 if args.update == 1:
    Update()
    
-#Twiter
+# #Twiter
 x = Twitter()
 x.UpdateTwitter(date)
